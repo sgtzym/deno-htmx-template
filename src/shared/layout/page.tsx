@@ -1,5 +1,4 @@
 import { Child } from '@hono/hono/jsx'
-
 import { Shell } from './shell.tsx'
 import { Sidebar } from './sidebar.tsx'
 

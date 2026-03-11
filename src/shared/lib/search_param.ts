@@ -16,7 +16,7 @@ type Infer<T extends Constructor> = T extends typeof String ? string
 	: never
 
 export type Schema = Record<string, Constructor>
-type ParsedSchema<T extends Schema> = { [K in keyof T]?: Infer<T[K]> }
+export type QuerySchema<T extends Schema> = { [K in keyof T]?: Infer<T[K]> }
 
 const cast = (value: string, type: Constructor): SqlParam | undefined => {
 	if (value.trim() === '') return undefined
@@ -51,23 +51,22 @@ const cast = (value: string, type: Constructor): SqlParam | undefined => {
 export function parse<T extends Schema>(
 	c: Context,
 	schema: T,
-): ParsedSchema<T> {
+): QuerySchema<T> {
 	const result: Record<string, SqlParam | string[]> = {}
 
-	for (
-		const [key, type] of Object.entries(schema) as [string, Constructor][]
-	) {
+	for (const [key, type] of Object.entries(schema) as [string, Constructor][]) {
 		if (type === Array) {
-			const values = c.req.queries(key) ?? []
-			if (values.length) result[key] = values
-		} else {
-			const value = c.req.query(key)
-			if (value !== undefined) {
-				const parsed = cast(value, type)
-				if (parsed !== undefined) result[key] = parsed
-			}
+			const values = c.req.queries(key)
+			if (values?.length) result[key] = values
+			continue
+		}
+
+		const value = c.req.query(key)
+		if (value !== undefined) {
+			const parsed = cast(value, type)
+			if (parsed !== undefined) result[key] = parsed
 		}
 	}
 
-	return result as ParsedSchema<T>
+	return result as QuerySchema<T>
 }

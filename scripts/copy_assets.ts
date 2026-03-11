@@ -1,6 +1,5 @@
 import { copy } from '@std/fs'
-
-import { ensureDir } from '~lib/utils.ts'
+import { ensureDir } from '~shared/lib/utils.ts'
 
 const npmPath = `${Deno.cwd()}/node_modules`
 const jsPath = `${Deno.cwd()}/public/js`

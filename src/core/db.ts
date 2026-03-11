@@ -1,6 +1,6 @@
-import { model as user } from '~entities/user.ts'
-import createDatabase from '~lib/create_db.ts'
-import { ensureDir } from '~lib/utils.ts'
+import { model as user } from '~entities/user/model.ts'
+import createDatabase from '~shared/lib/create_db.ts'
+import { ensureDir } from '~shared/lib/utils.ts'
 
 import cfg from './config.ts'
 

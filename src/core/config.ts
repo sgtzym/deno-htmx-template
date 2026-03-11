@@ -1,6 +1,6 @@
 import { load } from '@std/dotenv'
 
-import { env } from '~lib/env.ts'
+import { env } from '~shared/lib/env.ts'
 
 type DenoEnv = 'dev' | 'test' | 'prod'
 

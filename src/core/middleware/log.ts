@@ -1,9 +1,9 @@
 import type { Context, Next } from '@hono/hono'
 
-import { dateTime } from '~lib/utils.ts'
+import { dateTime } from '~shared/lib/utils.ts'
 
 /** Logs each request with method, path, status, and elapsed time. */
-export async function logger(c: Context, next: Next): Promise<void> {
+export const log = async (c: Context, next: Next): Promise<void> => {
 	const path = new URL(c.req.url).pathname
 	const start = performance.now()
 

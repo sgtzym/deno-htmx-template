@@ -3,10 +3,14 @@
 	"deno.lint": true,
 	"editor.defaultFormatter": "denoland.vscode-deno",
 	"editor.formatOnSave": true,
-	"[json]": {
+	"[javascript]": {
 		"editor.defaultFormatter": "denoland.vscode-deno"
 	},
-	"[jsonc]": {
+	"[json]": {
+		"editor.quickSuggestions": {
+			"strings": true
+		},
+		"editor.suggest.insertMode": "replace",
 		"editor.defaultFormatter": "denoland.vscode-deno"
 	},
 	"[typescript]": {
@@ -15,7 +19,4 @@
 	"[typescriptreact]": {
 		"editor.defaultFormatter": "denoland.vscode-deno"
 	},
-	"[yaml]": {
-		"editor.defaultFormatter": "denoland.vscode-deno"
-	}
 }

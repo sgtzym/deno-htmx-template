@@ -1,7 +1,7 @@
 import type { Select, Sparq, SqlNodeValue, TextColumn } from '@sgtzym/sparq'
 
-import { db } from '~app/db.ts'
-import type { AuditColumn, Insertable, Patchable } from '~lib/column.ts'
+import { db } from '~core/db.ts'
+import type { AuditColumn, Insertable, Patchable } from '~shared/lib/column.ts'
 
 import { now, uid } from './utils.ts'
 

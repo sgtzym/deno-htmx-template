@@ -13,6 +13,7 @@
 		"jsx": "precompile",
 		"jsxImportSource": "@hono/hono/jsx"
 	},
+	"nodeModulesDir": "auto",
 	"imports": {
 		"@db/sqlite": "jsr:@db/sqlite@^0.13.0",
 		"@hono/hono": "jsr:@hono/hono@^4.12.5",
@@ -29,26 +30,23 @@
 		"@std/path": "jsr:@std/path@^1.1.4",
 		"@std/uuid": "jsr:@std/uuid@^1.1.0",
 
-		"~app/": "./src/app/",
+		"~core/": "./src/core/",
 		"~entities/": "./src/entities/",
-		"~lib/": "./src/lib/",
-		"~routes/": "./src/routes/",
-		"~web/": "./src/web/"
+		"~modules/": "./src/modules/",
+		"~shared/": "./src/shared/"
 	},
-	"nodeModulesDir": "auto",
 	"fmt": {
-		"exclude": ["./public/"],
-
+		"exclude": [
+			"./public/"
+		],
 		"indentWidth": 4,
 		"lineWidth": 100,
 		"semiColons": false,
 		"singleQuote": true,
 		"useTabs": true,
-
 		"bracePosition": "sameLineUnlessHanging",
 		"trailingCommas": "onlyMultiLine",
 		"quoteProps": "asNeeded",
-
 		"jsx.bracketPosition": "sameLine",
 		"jsx.forceNewLinesSurroundingContent": false,
 		"jsx.multiLineParens": "always"

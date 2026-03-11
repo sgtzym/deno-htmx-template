@@ -1,16 +1,16 @@
 import { timingSafeEqual } from '@std/crypto'
 
 /**
- * Hashes a secret string using PBKDF2-SHA256.
+ * Hashes a password using PBKDF2-SHA256 with a random salt.
  *
- * @param secret - Plain-text secret to hash.
- * @returns Base64-encoded hash string.
+ * @param raw - Plain-text password to hash.
+ * @returns Base64-encoded salt + hash.
  */
-export async function hashPassword(secret: string): Promise<string> {
+export async function hashPassword(raw: string): Promise<string> {
 	const encoder = new TextEncoder()
 	const keyMaterial = await crypto.subtle.importKey(
 		'raw',
-		encoder.encode(secret),
+		encoder.encode(raw),
 		'PBKDF2',
 		false,
 		['deriveBits'],
@@ -32,12 +32,13 @@ export async function hashPassword(secret: string): Promise<string> {
 }
 
 /**
- * Verifies a secret string using stored PBKDF2 hash.
+ * Verifies a plain-text password against a stored PBKDF2 hash.
  *
- * @param secret - Plain-text password to verify.
- * @param stored - Previously hashed value from {@link hashPassword}.
+ * @param raw - Plain-text password to verify.
+ * @param stored - Value previously returned by {@link hashPassword}.
+ * @returns `true` if the password matches, otherwise `false`.
  */
-export async function verifyPassword(secret: string, stored: string): Promise<boolean> {
+export async function verifyPassword(raw: string, stored: string): Promise<boolean> {
 	const combined = Uint8Array.from(atob(stored), (c) => c.charCodeAt(0))
 	const salt = combined.slice(0, 16)
 	const storedHash = combined.slice(16)
@@ -45,7 +46,7 @@ export async function verifyPassword(secret: string, stored: string): Promise<bo
 	const encoder = new TextEncoder()
 	const keyMaterial = await crypto.subtle.importKey(
 		'raw',
-		encoder.encode(secret),
+		encoder.encode(raw),
 		'PBKDF2',
 		false,
 		['deriveBits'],

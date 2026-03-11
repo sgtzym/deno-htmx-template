@@ -1,4 +1,4 @@
-import { type User } from '~entities/user.ts'
+import { type User } from './user.ts'
 
 interface UserListProps {
 	users: Omit<User, 'password'>[]

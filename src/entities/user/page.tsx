@@ -1,6 +1,6 @@
-import { type User } from '~entities/user.ts'
+import { type User } from './user.ts'
 
-import { UserList } from './list.tsx'
+import { UserList } from '~entities/user/list.tsx'
 
 interface UserListPageProps {
 	users: Omit<User, 'password'>[]
